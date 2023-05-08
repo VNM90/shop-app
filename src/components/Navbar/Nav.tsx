@@ -1,4 +1,5 @@
 import React from "react";
+import { AppBar, Toolbar, Link, Box } from "@mui/material";
 
 interface NavItem {
     id: number;
@@ -14,15 +15,16 @@ const navItems: NavItem[] = [
 
 const Nav: React.FC = () => {
     return (
-        <nav>
-            <ul>
+        <AppBar sx={{position: "sticky"}}>
+            <Toolbar>
                 {navItems.map((item) => (
-                    <li key={item.id}>
-                        <a href={item.url}>{item.name}</a>
-                    </li>
+                    <Box key={item.id} sx={{ margin: 2}}>
+                        <Link href={item.url} sx={{ textDecoration: "none", color: "inherit", typography: "h6"}}>
+                            {item.name}</Link>
+                    </Box>
                 ))}
-            </ul>
-        </nav>
+            </Toolbar>
+        </AppBar>
     );
 };
 

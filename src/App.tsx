@@ -6,7 +6,6 @@ function App() {
     <>
         <Nav />
         <ProductList />
-      <h1>test</h1>
     </>
   )
 }
