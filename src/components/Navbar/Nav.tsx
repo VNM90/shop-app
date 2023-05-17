@@ -1,5 +1,6 @@
 import React from "react";
 import { AppBar, Toolbar, Link, Box } from "@mui/material";
+import { Link as RouterLink } from 'react-router-dom';
 
 interface NavItem {
     id: number;
@@ -9,18 +10,18 @@ interface NavItem {
 
 const navItems: NavItem[] = [
     { id: 1, name: "Home", url: "/" },
-    { id: 2, name: "Product", url: "/product" },
-    { id: 3, name: "Cart", url: "/cart" }
+    { id: 2, name: "Cart", url: "/cart" }
 ]
 
 const Nav: React.FC = () => {
     return (
-        <AppBar sx={{position: "sticky"}}>
+        <AppBar sx={{ position: "sticky" }}>
             <Toolbar>
                 {navItems.map((item) => (
                     <Box key={item.id} sx={{ margin: 2}}>
-                        <Link href={item.url} sx={{ textDecoration: "none", color: "inherit", typography: "h6"}}>
-                            {item.name}</Link>
+                        <Link component={RouterLink} to={item.url} sx={{ textDecoration: "none", color: "inherit", typography: "h6" }}>
+                            {item.name}
+                        </Link>
                     </Box>
                 ))}
             </Toolbar>
