@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchData } from "../../api/api.ts";
 import { Product } from "./Product.ts";
-import {Grid, Typography} from "@mui/material";
+import {Grid, IconButton, Typography, Card} from "@mui/material";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 const ProductDetails: React.FC = () => {
     const { id } = useParams();
@@ -39,11 +40,14 @@ const ProductDetails: React.FC = () => {
     }
     console.log("Products state:", product);
     return (
-        <div>
+        <Card>
             <h1>{product.title}</h1>
             <p>{product.description}</p>
             <p>${product.price}</p>
-        </div>
+            <IconButton>
+                <AddShoppingCartIcon />
+            </IconButton>
+        </Card>
     );
 };
 

@@ -5,16 +5,18 @@ import {Box, Grid, Card, CardContent, CardActions, IconButton, Typography} from 
 import { Link as MuiLink } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Link as RouterLink } from "react-router-dom";
+import Pagination from "../Pagination/Pagination.tsx"
 
 
 const ProductList: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [currentPage, setCurrentPage] = useState(0); // Add a state variable for the current page
+    const itemsPerPage = 10; // Set the number of items per page
 
     useEffect(() => {
         const fetchProductData = async () => {
-            const data = await fetchData();
-            // console.log("Fetched data:", data);
+            const data = await fetchData(); // Fetch all data
             setProducts(data);
             setIsLoading(false);
         };
@@ -22,7 +24,13 @@ const ProductList: React.FC = () => {
         fetchProductData();
     }, []);
 
-    // console.log("Products state:", products);
+    const handlePageClick = (data: { selected: number }) => {
+        setCurrentPage(data.selected);
+    };
+
+    // Get the products for the current page
+    const productsOnPage = products.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
+
     return (
         <>
         <Box sx={{ display: "flex", justifyContent: "center", padding: 4 }}>
@@ -39,7 +47,7 @@ const ProductList: React.FC = () => {
                     <Typography sx={{ typography: "h4" }}>Loading...</Typography>
                 </Grid>
             )}
-                {!isLoading && products.map((product) => (
+                {!isLoading && productsOnPage.map((product) => (
                     <Grid item key={product.id}>
                     <Card
                         sx={{
@@ -54,7 +62,7 @@ const ProductList: React.FC = () => {
                         </CardContent>
 
                     <CardActions>
-                        <IconButton aria-label="add to favorites">
+                        <IconButton>
                             <AddShoppingCartIcon />
                         </IconButton>
                     </CardActions>
@@ -62,6 +70,11 @@ const ProductList: React.FC = () => {
                     </Grid>
                 ))}
         </Grid>
+        <Pagination 
+            pageCount={Math.ceil(products.length / itemsPerPage)} 
+            currentPage={currentPage} 
+            onPageChange={handlePageClick} 
+        />
         </>
     );
 };
