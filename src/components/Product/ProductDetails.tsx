@@ -5,6 +5,7 @@ import { Product } from "./Product.ts";
 import {Grid, IconButton, Typography, Card} from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
+
 const ProductDetails: React.FC = () => {
     const { id } = useParams();
     const [product, setProduct] = useState<Product | null>(null);
