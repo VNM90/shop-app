@@ -4,21 +4,26 @@ import { fetchData } from "../../api/api.ts";
 import { Product } from "./Product.ts";
 import {Grid, IconButton, Typography, Card} from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../Cart/cartSlice.ts';
 
 
 const ProductDetails: React.FC = () => {
     const { id } = useParams();
     const [product, setProduct] = useState<Product | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const dispatch = useDispatch();
+
+    const handleAddToCart = () => {
+        if (product) {
+            dispatch(addToCart(product));
+        }
+    };
 
     useEffect(() => {
         const fetchProductData = async () => {
             const products = await fetchData();
             const product = products.find((product: Product) => product.id === Number(id));
-            // console.log("Fetched data:", product);
-            console.log(id);
-            console.log(product.id)
-            console.log(Number(id))
             setProduct(product);
             setIsLoading(false);
         };
@@ -26,11 +31,13 @@ const ProductDetails: React.FC = () => {
         fetchProductData();
     }, [id]);
 
-    {isLoading && (
-        <Grid>
-            <Typography sx={{ typography: "h4" }}>Loading...</Typography>
-        </Grid>
-    )}
+    if (isLoading) {
+        return (
+            <Grid>
+                <Typography sx={{ typography: "h4" }}>Loading...</Typography>
+            </Grid>
+        );
+    }
 
     if (!product) {
         return (
@@ -39,13 +46,17 @@ const ProductDetails: React.FC = () => {
             </Grid>
         );
     }
-    console.log("Products state:", product);
+
     return (
         <Card>
-            <h1>{product.title}</h1>
-            <p>{product.description}</p>
-            <p>${product.price}</p>
-            <IconButton>
+            <Typography sx={{ typography: "h1" }}>
+                {product.title}
+            </Typography>
+            <Typography sx={{ typography: "p" }}>
+                {product.description}
+            </Typography>
+            <Typography>${product.price}</Typography>
+            <IconButton onClick={handleAddToCart}>
                 <AddShoppingCartIcon />
             </IconButton>
         </Card>

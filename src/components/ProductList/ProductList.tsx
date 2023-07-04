@@ -6,13 +6,20 @@ import { Link as MuiLink } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Link as RouterLink } from "react-router-dom";
 import Pagination from "../Pagination/Pagination.tsx"
+import { addToCart } from '../Cart/cartSlice.ts';
+import { useDispatch } from 'react-redux';
 
 
 const ProductList: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [currentPage, setCurrentPage] = useState(0); // Add a state variable for the current page
-    const itemsPerPage = 10; // Set the number of items per page
+    const itemsPerPage = 10;
+    const dispatch = useDispatch();
+
+    const handleAddToCart = (product: Product) => {
+        dispatch(addToCart(product));
+      };
 
     useEffect(() => {
         const fetchProductData = async () => {
@@ -62,7 +69,7 @@ const ProductList: React.FC = () => {
                         </CardContent>
 
                     <CardActions>
-                        <IconButton>
+                        <IconButton onClick={() => handleAddToCart(product)}>
                             <AddShoppingCartIcon />
                         </IconButton>
                     </CardActions>
