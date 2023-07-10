@@ -1,5 +1,5 @@
-import React from 'react';
-import MuiPagination from '@mui/material/Pagination';
+import React from "react";
+import MuiPagination from "@mui/material/Pagination";
 
 interface PaginationProps {
   pageCount: number;

@@ -1,7 +1,7 @@
-import './App.css'
+import "./App.css"
 import Nav from "./components/Navbar/Nav.tsx";
 import ProductList from "./components/ProductList/ProductList.tsx";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProductDetails from "./components/Product/ProductDetails.tsx";
 import Cart from "./components/Cart/Cart.tsx"
 

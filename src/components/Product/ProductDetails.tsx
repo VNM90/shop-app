@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { fetchData } from "../../api/api.ts";
 import { Product } from "./Product.ts";
 import {Grid, IconButton, Typography, Card} from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../Cart/cartSlice.ts';
+import { useDispatch } from "react-redux";
+import { addToCart } from "../Cart/cartSlice.ts";
 
 
 const ProductDetails: React.FC = () => {

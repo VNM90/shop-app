@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Product } from "../Product/Product.ts";
 import { fetchData } from "../../api/api.ts";
 import {Box, Grid, Card, CardContent, CardActions, IconButton, Typography} from "@mui/material";
@@ -6,8 +6,8 @@ import { Link as MuiLink } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Link as RouterLink } from "react-router-dom";
 import Pagination from "../Pagination/Pagination.tsx"
-import { addToCart } from '../Cart/cartSlice.ts';
-import { useDispatch } from 'react-redux';
+import { addToCart } from "../Cart/cartSlice.ts";
+import { useDispatch } from "react-redux";
 
 
 const ProductList: React.FC = () => {

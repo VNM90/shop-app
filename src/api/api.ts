@@ -1,16 +1,16 @@
-import axios from 'axios';
+import axios from "axios";
 
 const apiClient = axios.create({
-    baseURL: 'https://dummyjson.com/products',
+    baseURL: process.env.REACT_APP_API_KEY,
 });
 
 export const fetchData = async () => {
     try {
-        const response = await apiClient.get('https://dummyjson.com/products');
-        // console.log(response.data.products)
+        const response = await apiClient.get("");
+    //    console.log(response.data.products)
         return response.data.products;
     } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
         throw error;
     }
 };
